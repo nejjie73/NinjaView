@@ -1,13 +1,13 @@
-# NinjaView
+# NinjaView: TradingView Pine Script indicators in NinjaTrader 8
 
-**Run TradingView Pine Script indicators inside NinjaTrader 8.**
+**Run TradingView Pine Script indicators inside NinjaTrader 8, with no conversion to NinjaScript. 7-day free trial.**
 
 NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader charts, calculated live from NinjaTrader's own data. It works two ways:
 
 - **NinjaView Pine indicator.** Add it to any NinjaTrader minute chart and point it at a Pine file. Plots, fills, levels, shapes, boxes, labels, lines and tables draw natively on the chart, and update tick by tick.
 - **NinjaView window.** A standalone chart (New > NinjaView) with NinjaTrader market data and the same Pine engine.
 
-**[Download the latest release](https://github.com/nejjie73/NinjaView/releases/latest)** · [Install guide](docs/install.md) · [What's supported](docs/supported-features.md) · [Report a script](https://github.com/nejjie73/NinjaView/issues/new/choose)
+**[Start the 7-day free trial: download the latest release](https://github.com/nejjie73/NinjaView/releases/latest)** · [Install guide](docs/install.md) · [What's supported](docs/supported-features.md) · [Report a script](https://github.com/nejjie73/NinjaView/issues/new/choose)
 
 ## Highlights
 
@@ -28,6 +28,8 @@ NinjaView is an independent, partial implementation of Pine. Some scripts will n
 
 If a script fails, [open an issue](https://github.com/nejjie73/NinjaView/issues/new/choose) with the error message and a link to the public script.
 
-## Terms
+## Trial and license
 
-Free to use; no warranty; not financial advice. Not affiliated with TradingView or NinjaTrader. See [TERMS.md](TERMS.md).
+NinjaView includes a 7-day free trial that starts the first time you use it. After that, enter a license key in **Control Center > New > NinjaView** or in the NinjaView Pine indicator's **License key** setting.
+
+No warranty; not financial advice. Not affiliated with TradingView or NinjaTrader. See [TERMS.md](TERMS.md).

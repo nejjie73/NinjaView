@@ -3,11 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NinjaView — Pine Script indicators in NinjaTrader 8</title>
-<meta name="description" content="NinjaView runs TradingView Pine Script (v5/v6) indicators inside NinjaTrader 8, calculated live from NinjaTrader data. Free download.">
-<meta property="og:title" content="NinjaView — Pine Script indicators in NinjaTrader 8">
-<meta property="og:description" content="Load a .pine indicator and see it on your NinjaTrader charts, updating tick by tick. Free download.">
+<title>Run TradingView Pine Script Indicators in NinjaTrader 8 | NinjaView</title>
+<meta name="description" content="Use TradingView Pine Script indicators in NinjaTrader 8 with no NinjaScript conversion. Runs Pine v5/v6 files live on your charts. 7-day free trial.">
+<meta name="keywords" content="Pine Script NinjaTrader, TradingView indicators NinjaTrader 8, convert Pine Script to NinjaScript, NinjaTrader 8 indicators, Pine Script v6, NinjaTrader add-on">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nejjie73.github.io/NinjaView/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="NinjaView">
+<meta property="og:url" content="https://nejjie73.github.io/NinjaView/">
+<meta property="og:title" content="Run TradingView Pine Script indicators in NinjaTrader 8">
+<meta property="og:description" content="Load a .pine indicator and see it on your NinjaTrader charts, updating tick by tick. 7-day free trial.">
+<meta property="og:image" content="https://nejjie73.github.io/NinjaView/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NinjaView: Pine Script indicators inside NinjaTrader 8">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Run TradingView Pine Script indicators in NinjaTrader 8">
+<meta name="twitter:description" content="Load a .pine indicator and see it on your NinjaTrader charts, updating tick by tick. 7-day free trial.">
+<meta name="twitter:image" content="https://nejjie73.github.io/NinjaView/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "NinjaView", "url": "https://nejjie73.github.io/NinjaView/", "downloadUrl": "https://github.com/nejjie73/NinjaView/releases/latest", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows", "softwareRequirements": "NinjaTrader 8.1.8 or later", "description": "Run TradingView Pine Script (v5/v6) indicators inside NinjaTrader 8, calculated live from NinjaTrader data.", "image": "https://nejjie73.github.io/NinjaView/og-image.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "7-day free trial"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I use TradingView indicators in NinjaTrader 8?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NinjaView loads a TradingView Pine Script indicator file (.pine) and runs it on NinjaTrader 8 charts, calculating from NinjaTrader's own market data. Add the NinjaView Pine indicator to a chart and choose your script."}}, {"@type": "Question", "name": "Do I need to convert Pine Script to NinjaScript?", "acceptedAnswer": {"@type": "Answer", "text": "No. NinjaView interprets Pine Script v5 and v6 directly, so there is no manual conversion to NinjaScript C#. Script inputs appear in NinjaTrader's indicator settings."}}, {"@type": "Question", "name": "Which Pine Script features are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Pine v5 and v6 indicators with var and varip state, user-defined types, methods, enums, arrays, maps, tuples, switch, a broad set of ta, math and str functions, plots, fills, hlines, shapes, boxes, lines, labels, polylines and tables, plus public library imports. It is a partial implementation, so some scripts may not compile yet."}}, {"@type": "Question", "name": "Does it work with strategies or place trades?", "acceptedAnswer": {"@type": "Answer", "text": "No. NinjaView runs indicator() scripts only. strategy() scripts are not supported, and NinjaView never places orders or accesses your account."}}, {"@type": "Question", "name": "Will results match TradingView exactly?", "acceptedAnswer": {"@type": "Answer", "text": "Usually closely, but not guaranteed. NinjaView is an independent implementation and results also depend on matching data, session and history. Compare on the same contract, timeframe and date range before relying on a script."}}, {"@type": "Question", "name": "Is NinjaView free?", "acceptedAnswer": {"@type": "Answer", "text": "NinjaView includes a 7-day free trial that starts the first time you use it. After the trial, a license key is required to keep using it."}}, {"@type": "Question", "name": "Which charts are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Time-based minute charts in NinjaTrader 8.1.8 and later on Windows x64. Tick, range, Renko and daily charts are not supported yet."}}]}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232466a7'/%3E%3Cpath d='M6 21l6-7 5 4 9-10' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
   :root {
@@ -57,6 +72,9 @@
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
   ul.plain { margin: 0; padding-left: 20px; color: var(--muted); }
   ul.plain li { margin-bottom: 8px; }
+  .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
+  .faq summary { cursor: pointer; font-weight: 600; }
+  .faq p { margin: 10px 0 2px; color: var(--muted); }
   footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
   @media (max-width: 820px) {
     .hero, .two { grid-template-columns: 1fr; gap: 28px; }
@@ -82,13 +100,13 @@
 
   <div class="hero">
     <div>
-      <h1>Pine Script indicators, inside NinjaTrader&nbsp;8.</h1>
-      <p class="lede">Load a TradingView <code>.pine</code> indicator and see it on your NinjaTrader charts, calculated from NinjaTrader's own data and updating tick by tick.</p>
+      <h1>Run TradingView Pine Script indicators in NinjaTrader&nbsp;8.</h1>
+      <p class="lede">Load a TradingView <code>.pine</code> indicator and see it on your NinjaTrader charts, calculated from NinjaTrader's own data and updating tick by tick. No conversion to NinjaScript.</p>
       <div class="cta">
-        <a class="btn primary" href="https://github.com/nejjie73/NinjaView/releases/latest">Download for NinjaTrader 8</a>
+        <a class="btn primary" href="https://github.com/nejjie73/NinjaView/releases/latest">Start the 7-day free trial</a>
         <a class="btn" href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">Install guide</a>
       </div>
-      <p class="fine">Free · Windows x64 · NinjaTrader 8.1.8+ · Not affiliated with TradingView or NinjaTrader</p>
+      <p class="fine">7-day free trial · Windows x64 · NinjaTrader 8.1.8+ · Not affiliated with TradingView or NinjaTrader</p>
     </div>
     <figure class="chart" style="margin:0">
       <svg viewBox="0 0 480 300" role="img" aria-label="Illustration: price candles with highlighted zones above an oscillator panel with gradient-shaded extremes">
@@ -141,7 +159,7 @@
   </div>
 
   <section id="features">
-    <h2>What it does</h2>
+    <h2>TradingView indicators on NinjaTrader charts</h2>
     <div class="grid">
       <div class="card"><h3>Native chart indicator</h3><p>Add <b>NinjaView Pine</b> to any NinjaTrader minute chart and choose a <code>.pine</code> file. Inputs show up in the indicator settings and save with your workspace.</p></div>
       <div class="card"><h3>Live, with correct rollback</h3><p>Developing bars update on every tick. <code>var</code> state rolls back between ticks and <code>varip</code> keeps intrabar changes, matching TradingView's realtime rules.</p></div>
@@ -176,8 +194,21 @@
     </div>
   </section>
 
+  <section id="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+        <details><summary>Can I use TradingView indicators in NinjaTrader 8?</summary><p>Yes. NinjaView loads a TradingView Pine Script indicator file (.pine) and runs it on NinjaTrader 8 charts, calculating from NinjaTrader's own market data. Add the NinjaView Pine indicator to a chart and choose your script.</p></details>
+        <details><summary>Do I need to convert Pine Script to NinjaScript?</summary><p>No. NinjaView interprets Pine Script v5 and v6 directly, so there is no manual conversion to NinjaScript C#. Script inputs appear in NinjaTrader's indicator settings.</p></details>
+        <details><summary>Which Pine Script features are supported?</summary><p>Pine v5 and v6 indicators with <code>var</code> and <code>varip</code> state, user-defined types, methods, enums, arrays, maps, tuples, switch, a broad set of ta, math and str functions, plots, fills, hlines, shapes, boxes, lines, labels, polylines and tables, plus public library imports. It is a partial implementation, so some scripts may not compile yet.</p></details>
+        <details><summary>Does it work with strategies or place trades?</summary><p>No. NinjaView runs <code>indicator()</code> scripts only. <code>strategy()</code> scripts are not supported, and NinjaView never places orders or accesses your account.</p></details>
+        <details><summary>Will results match TradingView exactly?</summary><p>Usually closely, but not guaranteed. NinjaView is an independent implementation and results also depend on matching data, session and history. Compare on the same contract, timeframe and date range before relying on a script.</p></details>
+        <details><summary>Is NinjaView free?</summary><p>NinjaView includes a 7-day free trial that starts the first time you use it. After the trial, a license key is required to keep using it.</p></details>
+        <details><summary>Which charts are supported?</summary><p>Time-based minute charts in NinjaTrader 8.1.8 and later on Windows x64. Tick, range, Renko and daily charts are not supported yet.</p></details>
+    </div>
+  </section>
+
   <footer>
-    NinjaView is free to use, with no warranty, and is not financial advice. See the <a href="https://github.com/nejjie73/NinjaView/blob/main/TERMS.md">terms</a>.<br>
+    NinjaView includes a 7-day free trial; continued use requires a license key. No warranty; not financial advice. See the <a href="https://github.com/nejjie73/NinjaView/blob/main/TERMS.md">terms</a>.<br>
     Not affiliated with, endorsed by, or sponsored by TradingView, Inc. or NinjaTrader, LLC. TradingView and Pine Script are trademarks of TradingView, Inc.; NinjaTrader and NinjaScript are trademarks of NinjaTrader, LLC.
   </footer>
 </div>

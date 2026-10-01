@@ -10,6 +10,15 @@ Download the latest **`NinjaView-…-NinjaScript.zip`** from the [Releases page]
 
 No PowerShell, extraction, administrator access, Node.js or .NET SDK is needed. Reference environment: NinjaTrader 8.1.8.3, Windows x64. The ZIP is unsigned, so NinjaTrader may show its normal third-party add-on warning.
 
+## Trial and license key
+
+The 7-day free trial starts the first time you use the NinjaView Pine indicator or open the NinjaView window. After it ends, both stop calculating until you enter a license key:
+
+- **Control Center > New > NinjaView** shows a license window where you can paste your key, or
+- open any **NinjaView Pine** indicator's settings and paste the key into **License > License key**.
+
+The key is stored for your Windows user and unlocks both. **License status** in the indicator settings shows the trial days left or your license expiry date.
+
 ## Verify the download
 
 Each release lists a SHA-256 checksum. In PowerShell:
