@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NinjaView — Pine Script indicators in NinjaTrader 8</title>
+<meta name="description" content="NinjaView runs TradingView Pine Script (v5/v6) indicators inside NinjaTrader 8, calculated live from NinjaTrader data. Free download.">
+<meta property="og:title" content="NinjaView — Pine Script indicators in NinjaTrader 8">
+<meta property="og:description" content="Load a .pine indicator and see it on your NinjaTrader charts, updating tick by tick. Free download.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232466a7'/%3E%3Cpath d='M6 21l6-7 5 4 9-10' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f7f8fa; --surface: #ffffff; --text: #141a22; --muted: #5a6575; --line: #e2e6ec;
+    --accent: #2466a7; --accent-ink: #ffffff; --hot: #c4162a; --cold: #2466a7; --code: #eef1f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1017; --surface: #121a24; --text: #e7ecf2; --muted: #9aa6b6; --line: #223042;
+      --accent: #4c8fd6; --accent-ink: #06101c; --hot: #e2505f; --cold: #5b9be0; --code: #172231;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1017; --surface: #121a24; --text: #e7ecf2; --muted: #9aa6b6; --line: #223042;
+    --accent: #4c8fd6; --accent-ink: #06101c; --hot: #e2505f; --cold: #5b9be0; --code: #172231;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
+  a { color: var(--accent); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; }
+  .brand svg { width: 28px; height: 28px; }
+  nav a { margin-left: 18px; color: var(--muted); text-decoration: none; font-size: 15px; }
+  nav a:hover { color: var(--text); }
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; padding: 40px 0 56px; }
+  h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.02em; }
+  .lede { font-size: 19px; color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { display: inline-block; padding: 12px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); color: var(--text); background: var(--surface); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn:hover { filter: brightness(1.06); }
+  .fine { color: var(--muted); font-size: 14px; margin-top: 14px; }
+  .chart { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .chart .cap { font-size: 12px; color: var(--muted); margin: 8px 2px 0; }
+  section { padding: 48px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 26px; margin: 0 0 20px; letter-spacing: -0.01em; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+  .card h3 { margin: 0 0 8px; font-size: 17px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  ol.steps { padding-left: 22px; margin: 0; }
+  ol.steps li { margin: 0 0 12px; }
+  code { background: var(--code); padding: 2px 6px; border-radius: 5px; font: 14px/1.4 Consolas, "Cascadia Mono", monospace; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  ul.plain { margin: 0; padding-left: 20px; color: var(--muted); }
+  ul.plain li { margin-bottom: 8px; }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  @media (max-width: 820px) {
+    .hero, .two { grid-template-columns: 1fr; gap: 28px; }
+    .grid { grid-template-columns: 1fr; }
+    nav a { margin-left: 12px; }
+    nav a.hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#2466a7"/><path d="M6 21l6-7 5 4 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      NinjaView
+    </a>
+    <nav>
+      <a href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">Install</a>
+      <a class="hide-sm" href="https://github.com/nejjie73/NinjaView/blob/main/docs/supported-features.md">Supported</a>
+      <a href="https://github.com/nejjie73/NinjaView">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Pine Script indicators, inside NinjaTrader&nbsp;8.</h1>
+      <p class="lede">Load a TradingView <code>.pine</code> indicator and see it on your NinjaTrader charts, calculated from NinjaTrader's own data and updating tick by tick.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/nejjie73/NinjaView/releases/latest">Download for NinjaTrader 8</a>
+        <a class="btn" href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">Install guide</a>
+      </div>
+      <p class="fine">Free · Windows x64 · NinjaTrader 8.1.8+ · Not affiliated with TradingView or NinjaTrader</p>
+    </div>
+    <figure class="chart" style="margin:0">
+      <svg viewBox="0 0 480 300" role="img" aria-label="Illustration: price candles with highlighted zones above an oscillator panel with gradient-shaded extremes">
+        <defs>
+          <linearGradient id="hot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--hot);stop-opacity:.75"/><stop offset="1" style="stop-color:var(--hot);stop-opacity:0"/></linearGradient>
+          <linearGradient id="cold" x1="0" y1="1" x2="0" y2="0"><stop offset="0" style="stop-color:var(--cold);stop-opacity:.75"/><stop offset="1" style="stop-color:var(--cold);stop-opacity:0"/></linearGradient>
+        </defs>
+        <rect x="238" y="22" width="92" height="66" fill="var(--hot)" opacity=".14" stroke="var(--hot)" stroke-opacity=".5"/>
+        <rect x="58" y="96" width="70" height="56" fill="var(--cold)" opacity=".14" stroke="var(--cold)" stroke-opacity=".5"/>
+        <g stroke-width="1.5">
+          <g stroke="var(--cold)" fill="var(--cold)">
+            <line x1="40" y1="70" x2="40" y2="104"/><rect x="36" y="76" width="8" height="20"/>
+            <line x1="152" y1="102" x2="152" y2="132"/><rect x="148" y="106" width="8" height="18"/>
+            <line x1="176" y1="78" x2="176" y2="112"/><rect x="172" y="84" width="8" height="20"/>
+            <line x1="200" y1="56" x2="200" y2="92"/><rect x="196" y="62" width="8" height="22"/>
+            <line x1="224" y1="40" x2="224" y2="74"/><rect x="220" y="46" width="8" height="20"/>
+            <line x1="272" y1="28" x2="272" y2="58"/><rect x="268" y="34" width="8" height="16"/>
+            <line x1="416" y1="78" x2="416" y2="110"/><rect x="412" y="84" width="8" height="18"/>
+            <line x1="440" y1="66" x2="440" y2="98"/><rect x="436" y="72" width="8" height="18"/>
+          </g>
+          <g stroke="var(--hot)" fill="var(--hot)">
+            <line x1="64" y1="88" x2="64" y2="124"/><rect x="60" y="94" width="8" height="22"/>
+            <line x1="88" y1="104" x2="88" y2="142"/><rect x="84" y="110" width="8" height="24"/>
+            <line x1="112" y1="112" x2="112" y2="148"/><rect x="108" y="118" width="8" height="20"/>
+            <line x1="128" y1="108" x2="128" y2="138"/><rect x="124" y="114" width="8" height="16"/>
+            <line x1="248" y1="30" x2="248" y2="62"/><rect x="244" y="36" width="8" height="18"/>
+            <line x1="296" y1="34" x2="296" y2="70"/><rect x="292" y="40" width="8" height="22"/>
+            <line x1="320" y1="48" x2="320" y2="86"/><rect x="316" y="54" width="8" height="24"/>
+            <line x1="344" y1="72" x2="344" y2="108"/><rect x="340" y="78" width="8" height="22"/>
+            <line x1="368" y1="88" x2="368" y2="122"/><rect x="364" y="94" width="8" height="20"/>
+            <line x1="392" y1="96" x2="392" y2="126"/><rect x="388" y="102" width="8" height="16"/>
+          </g>
+        </g>
+        <path d="M334 18 l6 9 l6 -9z" fill="var(--hot)"/>
+        <path d="M130 162 l6 -9 l6 9z" fill="var(--cold)"/>
+        <line x1="20" y1="176" x2="460" y2="176" stroke="var(--line)"/>
+        <g stroke="var(--muted)" stroke-opacity=".5" stroke-dasharray="1 0">
+          <line x1="20" y1="192" x2="460" y2="192"/><line x1="20" y1="284" x2="460" y2="284"/>
+        </g>
+        <g stroke="var(--muted)" stroke-opacity=".35">
+          <line x1="20" y1="208" x2="460" y2="208"/><line x1="20" y1="238" x2="460" y2="238"/><line x1="20" y1="268" x2="460" y2="268"/>
+        </g>
+        <path d="M232 208 C250 196 266 194 282 198 C300 202 316 196 334 208 L334 208 L232 208Z" fill="url(#hot)"/>
+        <path d="M48 268 C66 280 86 282 104 278 C116 276 126 274 136 268 L136 268 L48 268Z" fill="url(#cold)"/>
+        <path d="M20 232 C40 250 60 276 90 278 C120 280 140 262 170 240 C200 216 220 200 250 198 C280 196 300 196 330 206 C360 220 390 252 420 258 C440 262 450 256 460 250" fill="none" stroke="var(--text)" stroke-width="2"/>
+        <path d="M20 226 C50 240 70 262 100 266 C130 270 150 252 180 232 C210 212 230 204 260 202 C290 200 310 204 340 216 C370 230 400 244 430 246 C445 247 455 244 460 242" fill="none" stroke="var(--cold)" stroke-width="2"/>
+      </svg>
+      <figcaption class="cap">Illustration of a separate-panel oscillator with gradient fills and price-chart boxes, the kind of script NinjaView renders.</figcaption>
+    </figure>
+  </div>
+
+  <section id="features">
+    <h2>What it does</h2>
+    <div class="grid">
+      <div class="card"><h3>Native chart indicator</h3><p>Add <b>NinjaView Pine</b> to any NinjaTrader minute chart and choose a <code>.pine</code> file. Inputs show up in the indicator settings and save with your workspace.</p></div>
+      <div class="card"><h3>Live, with correct rollback</h3><p>Developing bars update on every tick. <code>var</code> state rolls back between ticks and <code>varip</code> keeps intrabar changes, matching TradingView's realtime rules.</p></div>
+      <div class="card"><h3>Separate panels and overlays</h3><p>Oscillators get their own panel, with hlines, gradient fills and markers. Objects created with <code>force_overlay</code> draw on the price chart.</p></div>
+      <div class="card"><h3>Pine v5 &amp; v6</h3><p>Types, methods, enums, arrays, maps, tuples and switch, plus a broad set of <code>ta.*</code>, <code>math.*</code>, <code>str.*</code>, boxes, lines, labels, polylines and tables.</p></div>
+      <div class="card"><h3>Public libraries</h3><p>Scripts that <code>import</code> open-source libraries fetch the exact version from TradingView once, verified and cached. Local copies always win.</p></div>
+      <div class="card"><h3>Read-only and private</h3><p>No orders, no account access, no TradingView login. Your scripts stay on your machine.</p></div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="two">
+      <div>
+        <h2>Install in a minute</h2>
+        <ol class="steps">
+          <li><a href="https://github.com/nejjie73/NinjaView/releases/latest">Download</a> the <code>-NinjaScript.zip</code>. Leave it zipped.</li>
+          <li>In NinjaTrader: <b>Tools › Import › NinjaScript Add-On</b>, then pick the ZIP.</li>
+          <li>Restart NinjaTrader.</li>
+          <li>Add <b>NinjaView Pine</b> to a chart and choose your <code>.pine</code> file. For oscillators, set <b>Panel</b> to <b>New panel</b>.</li>
+        </ol>
+        <p class="fine">Full details, checksums and rollback: <a href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">install guide</a>.</p>
+      </div>
+      <div>
+        <h2>Good to know</h2>
+        <ul class="plain">
+          <li>NinjaView is an independent, partial implementation of Pine. Some scripts won't compile yet, and <code>strategy()</code> scripts aren't supported.</li>
+          <li>A script that loads can still calculate differently from TradingView. Compare on the same contract, timeframe and history before relying on it.</li>
+          <li>Time-based minute charts only for now (no tick, range, Renko or daily).</li>
+          <li>Script failing? <a href="https://github.com/nejjie73/NinjaView/issues/new/choose">Open an issue</a> with the error and a link to the public script.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    NinjaView is free to use, with no warranty, and is not financial advice. See the <a href="https://github.com/nejjie73/NinjaView/blob/main/TERMS.md">terms</a>.<br>
+    Not affiliated with, endorsed by, or sponsored by TradingView, Inc. or NinjaTrader, LLC. TradingView and Pine Script are trademarks of TradingView, Inc.; NinjaTrader and NinjaScript are trademarks of NinjaTrader, LLC.
+  </footer>
+</div>
+</body>
+</html>
