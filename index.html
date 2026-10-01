@@ -24,21 +24,22 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "NinjaView", "url": "https://nejjie73.github.io/NinjaView/", "downloadUrl": "https://github.com/nejjie73/NinjaView/releases/latest", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows", "softwareRequirements": "NinjaTrader 8.1.8 or later", "description": "Run TradingView Pine Script (v5/v6) indicators inside NinjaTrader 8, calculated live from NinjaTrader data.", "image": "https://nejjie73.github.io/NinjaView/og-image.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "7-day free trial"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I use TradingView indicators in NinjaTrader 8?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NinjaView loads a TradingView Pine Script indicator file (.pine) and runs it on NinjaTrader 8 charts, calculating from NinjaTrader's own market data. Add the NinjaView Pine indicator to a chart and choose your script."}}, {"@type": "Question", "name": "Do I need to convert Pine Script to NinjaScript?", "acceptedAnswer": {"@type": "Answer", "text": "No. NinjaView interprets Pine Script v5 and v6 directly, so there is no manual conversion to NinjaScript C#. Script inputs appear in NinjaTrader's indicator settings."}}, {"@type": "Question", "name": "Which Pine Script features are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Pine v5 and v6 indicators with var and varip state, user-defined types, methods, enums, arrays, maps, tuples, switch, a broad set of ta, math and str functions, plots, fills, hlines, shapes, boxes, lines, labels, polylines and tables, plus public library imports. It is a partial implementation, so some scripts may not compile yet."}}, {"@type": "Question", "name": "Does it work with strategies or place trades?", "acceptedAnswer": {"@type": "Answer", "text": "No. NinjaView runs indicator() scripts only. strategy() scripts are not supported, and NinjaView never places orders or accesses your account."}}, {"@type": "Question", "name": "Will results match TradingView exactly?", "acceptedAnswer": {"@type": "Answer", "text": "Usually closely, but not guaranteed. NinjaView is an independent implementation and results also depend on matching data, session and history. Compare on the same contract, timeframe and date range before relying on a script."}}, {"@type": "Question", "name": "Is NinjaView free?", "acceptedAnswer": {"@type": "Answer", "text": "NinjaView includes a 7-day free trial that starts the first time you use it. After the trial, a license key is required to keep using it."}}, {"@type": "Question", "name": "Which charts are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Time-based minute charts in NinjaTrader 8.1.8 and later on Windows x64. Tick, range, Renko and daily charts are not supported yet."}}]}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232466a7'/%3E%3Cpath d='M6 21l6-7 5 4 9-10' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{if(localStorage.getItem("nv-theme")==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
 <style>
+  /* Soft slate dark by default (easy on the eyes, like a charting platform); no pure white or black. */
   :root {
-    --bg: #f7f8fa; --surface: #ffffff; --text: #141a22; --muted: #5a6575; --line: #e2e6ec;
-    --accent: #2466a7; --accent-ink: #ffffff; --hot: #c4162a; --cold: #2466a7; --code: #eef1f5;
+    color-scheme: dark;
+    --bg: #141c27; --surface: #1b2532; --text: #d9e0e8; --muted: #94a1b2; --line: #2a3747;
+    --accent: #5b98d8; --accent-ink: #0d1824; --hot: #d9606c; --cold: #6aa3e0; --code: #222e3d;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0b1017; --surface: #121a24; --text: #e7ecf2; --muted: #9aa6b6; --line: #223042;
-      --accent: #4c8fd6; --accent-ink: #06101c; --hot: #e2505f; --cold: #5b9be0; --code: #172231;
-    }
+  /* Optional light theme, warm off-white rather than bright white. */
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ecebe6; --surface: #f4f3ef; --text: #232a33; --muted: #5b6573; --line: #d8d6cf;
+    --accent: #2b67a3; --accent-ink: #f4f3ef; --hot: #b8323f; --cold: #2b67a3; --code: #e3e1da;
   }
-  :root[data-theme="dark"] {
-    --bg: #0b1017; --surface: #121a24; --text: #e7ecf2; --muted: #9aa6b6; --line: #223042;
-    --accent: #4c8fd6; --accent-ink: #06101c; --hot: #e2505f; --cold: #5b9be0; --code: #172231;
-  }
+  .theme { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 4px 10px; margin-left: 18px; font: inherit; font-size: 14px; cursor: pointer; }
+  .theme:hover { color: var(--text); }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
@@ -95,6 +96,7 @@
       <a href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">Install</a>
       <a class="hide-sm" href="https://github.com/nejjie73/NinjaView/blob/main/docs/supported-features.md">Supported</a>
       <a href="https://github.com/nejjie73/NinjaView">GitHub</a>
+      <button class="theme" type="button" id="theme" aria-label="Switch color theme">Light</button>
     </nav>
   </header>
 
@@ -212,5 +214,11 @@
     Not affiliated with, endorsed by, or sponsored by TradingView, Inc. or NinjaTrader, LLC. TradingView and Pine Script are trademarks of TradingView, Inc.; NinjaTrader and NinjaScript are trademarks of NinjaTrader, LLC.
   </footer>
 </div>
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+function label(){b.textContent=r.dataset.theme==="light"?"Dark":"Light";}
+b.addEventListener("click",function(){if(r.dataset.theme==="light")delete r.dataset.theme;else r.dataset.theme="light";
+try{localStorage.setItem("nv-theme",r.dataset.theme==="light"?"light":"dark");}catch(e){}label();});label();})();
+</script>
 </body>
 </html>
