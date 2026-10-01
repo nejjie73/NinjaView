@@ -11,7 +11,9 @@ NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader 
 
 ## Highlights
 
-- Pine v5 and v6: persistent `var`/`varip` state with correct realtime rollback, user types, methods, enums, arrays, maps, tuples, switch/if/for/while, and a broad set of `ta.*`, `math.*`, `str.*` and drawing functions.
+- Pine v5 and v6: persistent `var`/`varip` state with correct realtime rollback, user types, methods, enums, arrays, maps, matrices, named arguments, tuples, switch/if/for/while, and most `ta.*`, `math.*`, `str.*` and drawing functions.
+- Older Pine v1–v4 scripts (many classic public indicators) are upgraded automatically.
+- Every plot style (line, step, histogram, columns, area, circles, cross), linefills, and higher-timeframe `request.security`.
 - Separate-panel (oscillator) scripts get their own panel; `force_overlay` objects draw on the price chart.
 - Script inputs appear in NinjaTrader's indicator settings and are saved with your workspace.
 - Public libraries (`import Owner/Library/Version`) are fetched once from TradingView by exact version, verified and cached. Local copies always take priority.
@@ -24,7 +26,7 @@ NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader 
 
 ## Limits
 
-NinjaView is an independent, partial implementation of Pine. Some scripts will not compile yet, `strategy()` scripts are not supported, and a script that loads may still calculate differently from TradingView. Check results against TradingView before relying on them. See [what's supported](docs/supported-features.md) for details.
+NinjaView is an independent, partial implementation of Pine. Some scripts will not compile yet, `strategy()` scripts show their plots and drawings without simulating trades, and a script that loads may still calculate differently from TradingView. Check results against TradingView before relying on them. See [what's supported](docs/supported-features.md) for details.
 
 If a script fails, [open an issue](https://github.com/nejjie73/NinjaView/issues/new/choose) with the error message and a link to the public script.
 
