@@ -5,7 +5,7 @@
 NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader charts, calculated live from NinjaTrader's own data. It works two ways:
 
 - **NinjaView Pine indicator.** Add it to any NinjaTrader minute chart and point it at a Pine file. Plots, fills, levels, shapes, boxes, labels, lines and tables draw natively on the chart, and update tick by tick.
-- **NinjaView window.** A standalone chart (New > NinjaView) with NinjaTrader market data and the same Pine engine.
+- **NinjaView window.** A standalone chart (New > NinjaView) with NinjaTrader market data and the same Pine engine. It draws the same plots, labels and tables as the indicator, on any minute interval from 1 to 1440.
 
 **[Download the latest release](https://github.com/nejjie73/NinjaView/releases/latest)** · [Install guide](docs/install.md) · [What's supported](docs/supported-features.md) · [Report a script](https://github.com/nejjie73/NinjaView/issues/new/choose)
 

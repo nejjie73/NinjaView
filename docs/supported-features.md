@@ -4,7 +4,7 @@ NinjaView is an independent, partial Pine v5/v6 implementation; Pine v1–v4 scr
 
 | Area | Current beta scope |
 | --- | --- |
-| NinjaView add-on | Separate WebView2 chart, NT market history/streaming, instrument and minute interval selection, Pine loading and inputs, chart appearance and open/close timestamp display |
+| NinjaView add-on | Separate WebView2 chart, NT market history/streaming, instrument and any 1–1440 minute interval, Pine loading and inputs, chart appearance and open/close timestamp display |
 | NinjaView Pine indicator | Standard NT time-based minute charts; chart's primary bars plus a fixed one-minute secondary series; multiple instances, input persistence, custom native graphics |
 | Pine | v5/v6 syntax and APIs implemented by this engine: most of the `ta`, `math`, `str`, `array`, `map` and `matrix` namespaces, named arguments, persistent state, objects/methods/enums, `once`, `if`/`switch` expressions, inputs (including `input.enum`, `input.time`, `input.price`) and imports. Pine v1–v4 sources are upgraded automatically. Support remains incomplete |
 | Output | Plots in every style (line, step, histogram, columns, area, circles, cross, broken variants), plot offsets, fills, linefills, markers, arrows, candles/bars, lines, boxes, labels, polylines and tables; native typography and exact pixel parity remain approximate |
