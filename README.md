@@ -1,6 +1,6 @@
 # NinjaView: TradingView Pine Script indicators in NinjaTrader 8
 
-**Run TradingView Pine Script indicators inside NinjaTrader 8, with no conversion to NinjaScript. 7-day free trial.**
+**Run TradingView Pine Script indicators inside NinjaTrader 8, with no conversion to NinjaScript.**
 
 NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader charts, calculated live from NinjaTrader's own data. It works two ways:
 
@@ -31,8 +31,8 @@ NinjaView is an independent, partial implementation of Pine. Some scripts will n
 
 If a script fails, [open an issue](https://github.com/nejjie73/NinjaView/issues/new/choose) with the error message and a link to the public script.
 
-## Trial and license
+## License key
 
-NinjaView includes a 7-day free trial that starts the first time you use it. After that, enter a license key in **Control Center > New > NinjaView** or in the NinjaView Pine indicator's **License key** setting.
+To enter a license key, use **Control Center > New > NinjaView** or the NinjaView Pine indicator's **License key** setting.
 
 No warranty; not financial advice. Not affiliated with TradingView or NinjaTrader. See [TERMS.md](TERMS.md).
