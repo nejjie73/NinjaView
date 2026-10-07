@@ -17,6 +17,7 @@ NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader 
 - Separate-panel (oscillator) scripts get their own panel; `force_overlay` objects draw on the price chart.
 - Script inputs appear in NinjaTrader's indicator settings and are saved with your workspace.
 - Public libraries (`import Owner/Library/Version`) are fetched once from TradingView by exact version, verified and cached. Local copies always take priority.
+- **Your NinjaTrader indicators in the NinjaView window** (experimental): Add Indicator lists every installed NinjaTrader indicator next to your Pine scripts. They run on NinjaTrader's own engine with their plots, drawings and on-chart painting, and their settings are editable in NinjaView.
 - **Bar Replay and paper trading** in the NinjaView window: start from any bar (or a random one), play the market forward with your Pine indicator, and trade it with a TradingView-style order panel, quick buy/sell buttons and a right-click menu. Results show P&L, win rate, profit factor and drawdown; trade logs save as CSV. Fills are simulated on one-minute bars.
 - No live orders, no account access, no TradingView login.
 
