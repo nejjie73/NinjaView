@@ -60,6 +60,7 @@
   .fine { color: var(--muted); font-size: 14px; margin-top: 14px; }
   .chart { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
   .chart svg { width: 100%; height: auto; display: block; }
+  .chart video { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; border-radius: 8px; background: #0f1620; }
   .chart .cap { font-size: 12px; color: var(--muted); margin: 8px 2px 0; }
   section { padding: 48px 0; border-top: 1px solid var(--line); }
   h2 { font-size: 26px; margin: 0 0 20px; letter-spacing: -0.01em; }
@@ -112,52 +113,8 @@
       <p class="fine">Windows x64 · NinjaTrader 8.1.8+ · Not affiliated with TradingView or NinjaTrader</p>
     </div>
     <figure class="chart" style="margin:0">
-      <svg viewBox="0 0 480 300" role="img" aria-label="Illustration: price candles with highlighted zones above an oscillator panel with gradient-shaded extremes">
-        <defs>
-          <linearGradient id="hot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--hot);stop-opacity:.75"/><stop offset="1" style="stop-color:var(--hot);stop-opacity:0"/></linearGradient>
-          <linearGradient id="cold" x1="0" y1="1" x2="0" y2="0"><stop offset="0" style="stop-color:var(--cold);stop-opacity:.75"/><stop offset="1" style="stop-color:var(--cold);stop-opacity:0"/></linearGradient>
-        </defs>
-        <rect x="238" y="22" width="92" height="66" fill="var(--hot)" opacity=".14" stroke="var(--hot)" stroke-opacity=".5"/>
-        <rect x="58" y="96" width="70" height="56" fill="var(--cold)" opacity=".14" stroke="var(--cold)" stroke-opacity=".5"/>
-        <g stroke-width="1.5">
-          <g stroke="var(--cold)" fill="var(--cold)">
-            <line x1="40" y1="70" x2="40" y2="104"/><rect x="36" y="76" width="8" height="20"/>
-            <line x1="152" y1="102" x2="152" y2="132"/><rect x="148" y="106" width="8" height="18"/>
-            <line x1="176" y1="78" x2="176" y2="112"/><rect x="172" y="84" width="8" height="20"/>
-            <line x1="200" y1="56" x2="200" y2="92"/><rect x="196" y="62" width="8" height="22"/>
-            <line x1="224" y1="40" x2="224" y2="74"/><rect x="220" y="46" width="8" height="20"/>
-            <line x1="272" y1="28" x2="272" y2="58"/><rect x="268" y="34" width="8" height="16"/>
-            <line x1="416" y1="78" x2="416" y2="110"/><rect x="412" y="84" width="8" height="18"/>
-            <line x1="440" y1="66" x2="440" y2="98"/><rect x="436" y="72" width="8" height="18"/>
-          </g>
-          <g stroke="var(--hot)" fill="var(--hot)">
-            <line x1="64" y1="88" x2="64" y2="124"/><rect x="60" y="94" width="8" height="22"/>
-            <line x1="88" y1="104" x2="88" y2="142"/><rect x="84" y="110" width="8" height="24"/>
-            <line x1="112" y1="112" x2="112" y2="148"/><rect x="108" y="118" width="8" height="20"/>
-            <line x1="128" y1="108" x2="128" y2="138"/><rect x="124" y="114" width="8" height="16"/>
-            <line x1="248" y1="30" x2="248" y2="62"/><rect x="244" y="36" width="8" height="18"/>
-            <line x1="296" y1="34" x2="296" y2="70"/><rect x="292" y="40" width="8" height="22"/>
-            <line x1="320" y1="48" x2="320" y2="86"/><rect x="316" y="54" width="8" height="24"/>
-            <line x1="344" y1="72" x2="344" y2="108"/><rect x="340" y="78" width="8" height="22"/>
-            <line x1="368" y1="88" x2="368" y2="122"/><rect x="364" y="94" width="8" height="20"/>
-            <line x1="392" y1="96" x2="392" y2="126"/><rect x="388" y="102" width="8" height="16"/>
-          </g>
-        </g>
-        <path d="M334 18 l6 9 l6 -9z" fill="var(--hot)"/>
-        <path d="M130 162 l6 -9 l6 9z" fill="var(--cold)"/>
-        <line x1="20" y1="176" x2="460" y2="176" stroke="var(--line)"/>
-        <g stroke="var(--muted)" stroke-opacity=".5" stroke-dasharray="1 0">
-          <line x1="20" y1="192" x2="460" y2="192"/><line x1="20" y1="284" x2="460" y2="284"/>
-        </g>
-        <g stroke="var(--muted)" stroke-opacity=".35">
-          <line x1="20" y1="208" x2="460" y2="208"/><line x1="20" y1="238" x2="460" y2="238"/><line x1="20" y1="268" x2="460" y2="268"/>
-        </g>
-        <path d="M232 208 C250 196 266 194 282 198 C300 202 316 196 334 208 L334 208 L232 208Z" fill="url(#hot)"/>
-        <path d="M48 268 C66 280 86 282 104 278 C116 276 126 274 136 268 L136 268 L48 268Z" fill="url(#cold)"/>
-        <path d="M20 232 C40 250 60 276 90 278 C120 280 140 262 170 240 C200 216 220 200 250 198 C280 196 300 196 330 206 C360 220 390 252 420 258 C440 262 450 256 460 250" fill="none" stroke="var(--text)" stroke-width="2"/>
-        <path d="M20 226 C50 240 70 262 100 266 C130 270 150 252 180 232 C210 212 230 204 260 202 C290 200 310 204 340 216 C370 230 400 244 430 246 C445 247 455 244 460 242" fill="none" stroke="var(--cold)" stroke-width="2"/>
-      </svg>
-      <figcaption class="cap">Illustration of a separate-panel oscillator with gradient fills and price-chart boxes, the kind of script NinjaView renders.</figcaption>
+      <video class="trailer" src="media/ninjaview-trailer.mp4" poster="media/ninjaview-trailer-poster.jpg" width="1920" height="1080" autoplay muted loop playsinline controls preload="metadata" aria-label="NinjaView trailer: Pine scripts, NinjaTrader indicators, Bar Replay and chart trading in the NinjaView window"></video>
+      <figcaption class="cap">53-second tour: Pine scripts, NinjaTrader indicators, Bar Replay and chart trading. Real NQ futures data; the trades shown are simulated.</figcaption>
     </figure>
   </div>
 
@@ -223,6 +180,8 @@
 function label(){b.textContent=r.dataset.theme==="light"?"Dark":"Light";}
 b.addEventListener("click",function(){if(r.dataset.theme==="light")delete r.dataset.theme;else r.dataset.theme="light";
 try{localStorage.setItem("nv-theme",r.dataset.theme==="light"?"light":"dark");}catch(e){}label();});label();})();
+(function(){var v=document.querySelector("video.trailer");
+if(v&&window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches){v.removeAttribute("autoplay");v.pause();}})();
 </script>
 </body>
 </html>
