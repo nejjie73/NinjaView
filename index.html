@@ -60,6 +60,8 @@
   .fine { color: var(--muted); font-size: 14px; margin-top: 14px; }
   .chart { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
   .chart svg { width: 100%; height: auto; display: block; }
+  /* The trailer spills into the right-hand margin on wide screens so the UI text stays readable. */
+  .hero-media { margin: 0 calc(-1 * clamp(0px, (100vw - 1040px) / 2 - 32px, 400px)) 0 0; }
   .chart video { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; border-radius: 8px; background: #0f1620; }
   .chart .cap { font-size: 12px; color: var(--muted); margin: 8px 2px 0; }
   section { padding: 48px 0; border-top: 1px solid var(--line); }
@@ -112,7 +114,7 @@
       </div>
       <p class="fine">Windows x64 · NinjaTrader 8.1.8+ · Not affiliated with TradingView or NinjaTrader</p>
     </div>
-    <figure class="chart" style="margin:0">
+    <figure class="chart hero-media">
       <video class="trailer" src="media/ninjaview-trailer.mp4" poster="media/ninjaview-trailer-poster.jpg" width="1920" height="1080" autoplay muted loop playsinline controls preload="metadata" aria-label="NinjaView trailer: Pine scripts, NinjaTrader indicators, Bar Replay and chart trading in the NinjaView window"></video>
       <figcaption class="cap">53-second tour: Pine scripts, NinjaTrader indicators, Bar Replay and chart trading. Real NQ futures data; the trades shown are simulated.</figcaption>
     </figure>
