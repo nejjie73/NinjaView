@@ -19,7 +19,8 @@ NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader 
 - Public libraries (`import Owner/Library/Version`) are fetched once from TradingView by exact version, verified and cached. Local copies always take priority.
 - **Your NinjaTrader indicators in the NinjaView window** (experimental): Add Indicator lists every installed NinjaTrader indicator next to your Pine scripts. They run on NinjaTrader's own engine with their plots, drawings and on-chart painting, and their settings are editable in NinjaView.
 - **Bar Replay and paper trading** in the NinjaView window: start from any bar (or a random one), play the market forward with your Pine indicator, and trade it with a TradingView-style order panel, quick buy/sell buttons and a right-click menu. Results show P&L, win rate, profit factor and drawdown; trade logs save as CSV. Fills are simulated on one-minute bars.
-- No live orders, no account access, no TradingView login.
+- **Trading from the NinjaView window:** trade the chart on a NinjaTrader account you choose, with market, limit and stop orders, a take profit and stop loss you drag on the chart, draft orders you can position before sending, Flatten and Reverse. Orders go through NinjaTrader like Chart Trader; trading starts switched off in every window and live accounts are labelled LIVE. Trading involves substantial risk of loss: try a simulation account first.
+- No TradingView login, and NinjaView never sees your broker login.
 
 ## Requirements
 

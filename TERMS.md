@@ -3,7 +3,8 @@
 Continued use of NinjaView requires a valid license key. License keys are personal to the licensee and expire on the date shown in the key.
 
 - **No warranty.** NinjaView is provided "as is", without warranty of any kind. You use it at your own risk. The author is not liable for any loss, including trading losses, arising from its use.
-- **Not financial advice.** NinjaView displays indicator calculations. Nothing it shows is a recommendation to buy or sell anything. NinjaView never places orders with your broker; trades in Bar Replay are simulated on historical data.
+- **Not financial advice.** NinjaView displays indicator calculations. Nothing it shows is a recommendation to buy or sell anything. Trades in Bar Replay are simulated on historical data.
+- **Trading is at your own risk.** The NinjaView window can place real orders on a NinjaTrader account you select, through NinjaTrader, when you switch trading on. Trading futures and other leveraged products involves substantial risk of loss and is not suitable for everyone. You are responsible for every order placed, for choosing the right account, and for checking orders and positions in NinjaTrader. Software, connections and brokers can fail, delay or reject orders. Try trading on a simulation account first. The author is not liable for any trading loss, missed trade or order error, including one caused by a defect in NinjaView.
 - **Calculations can differ.** NinjaView is an independent, partial implementation of Pine Script. A script that loads is not guaranteed to calculate exactly like TradingView. Verify results before relying on them.
 - **Redistribution.** Please link to this repository rather than re-hosting the files, so people get current, checksummed releases. Don't redistribute modified binaries under the NinjaView name.
 - **Scripts you run are your responsibility.** Respect the licenses of the Pine scripts and libraries you load.
