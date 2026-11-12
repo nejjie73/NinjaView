@@ -26,7 +26,7 @@ NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader 
 
 ## Requirements
 
-- NinjaTrader 8 (tested on 8.1.8.3), Windows x64
+- NinjaTrader 8 (tested on 8.1.9.0), Windows x64
 - Time-based minute charts (tick, range, Renko and daily charts are not supported yet)
 
 ## Limits

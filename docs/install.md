@@ -8,7 +8,7 @@ Download the latest **`NinjaView-…-NinjaScript.zip`** from the [Releases page]
 4. Open **New > NinjaView** for the standalone chart window, or add **NinjaView Pine** from a chart's Indicators dialog and choose your local `.pine` file.
 5. For oscillator-style scripts (anything that is not `overlay=true`), set **Panel** to **New panel** when adding the indicator. NinjaTrader chooses the panel before the script is loaded; if you forget, the indicator shows a reminder instead of squashing your price chart.
 
-No PowerShell, extraction, administrator access, Node.js or .NET SDK is needed. Reference environment: NinjaTrader 8.1.8.3, Windows x64. The ZIP is unsigned, so NinjaTrader may show its normal third-party add-on warning.
+No PowerShell, extraction, administrator access, Node.js or .NET SDK is needed. Reference environment: NinjaTrader 8.1.9.0, Windows x64. The ZIP is unsigned, so NinjaTrader may show its normal third-party add-on warning.
 
 ## License key
 
