@@ -1,15 +1,23 @@
-# NinjaView: TradingView Pine Script indicators in NinjaTrader 8
+# NinjaView: a modern, TradingView-style chart for NinjaTrader 8
 
-**Run TradingView Pine Script indicators inside NinjaTrader 8, with no conversion to NinjaScript.**
+**A chart window that runs inside NinjaTrader 8, on your NinjaTrader data and accounts: trade from the chart, replay the market, copy trades across accounts, and run TradingView Pine Script and NinjaTrader indicators side by side.**
 
-NinjaView lets you load a `.pine` indicator file and see it on your NinjaTrader charts, calculated live from NinjaTrader's own data. It works two ways:
+Open **New > NinjaView** in NinjaTrader. The window uses NinjaTrader's market data, your NinjaTrader accounts and NinjaTrader's order routing, so it fits alongside the platform you already use:
 
-- **NinjaView Pine indicator.** Add it to any NinjaTrader minute chart and point it at a Pine file. Plots, fills, levels, shapes, boxes, labels, lines and tables draw natively on the chart, and update tick by tick.
-- **NinjaView window.** A standalone chart (New > NinjaView) with NinjaTrader market data and the same Pine engine. It draws the same plots, labels and tables as the indicator, on any minute interval from 1 to 1440, and has TradingView-style **Bar Replay** with paper trading.
+- **Chart trading:** market, limit and stop orders, a stop loss with one or more partial take profits you drag on the chart, draft orders, and every position on the account with Flatten per instrument.
+- **Bar Replay and paper trading:** play the market forward from any bar with your indicators, and trade it with a TradingView-style order panel.
+- **Copier and Groups:** copy every order from one account to others you select.
+- **Indicators:** up to 16 at once, your TradingView Pine scripts and your NinjaTrader indicators, in a TradingView-style legend.
+- **Overlays:** the 15m triple for NQ and ES; PackView for Pack members in the Pack edition.
+- **Black & Gold or Slate** interface themes and TradingView-style chart settings.
 
-**[Download the latest release](https://github.com/nejjie73/NinjaView/releases/latest)** · [Install guide](docs/install.md) · [What's supported](docs/supported-features.md) · [Report a script](https://github.com/nejjie73/NinjaView/issues/new/choose)
+Pine scripts also run on regular NinjaTrader charts through the **NinjaView Pine** indicator, with no conversion to NinjaScript.
 
-## Highlights
+**[Download the latest release](https://github.com/nejjie73/NinjaView/releases/latest)** · [Install guide](docs/install.md) · [What's supported](docs/supported-features.md) · [Report an issue](https://github.com/nejjie73/NinjaView/issues/new/choose)
+
+![The NinjaView window in Black & Gold: an NQ chart with a Pine indicator and the 15m triple overlay](media/screen-chart.jpg)
+
+## In detail
 
 - Pine v5 and v6: persistent `var`/`varip` state with correct realtime rollback, user types, methods, enums, arrays, maps, matrices, named arguments, tuples, switch/if/for/while, and most `ta.*`, `math.*`, `str.*` and drawing functions.
 - Older Pine v1–v4 scripts (many classic public indicators) are upgraded automatically.

@@ -3,136 +3,234 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Run TradingView Pine Script Indicators in NinjaTrader 8 | NinjaView</title>
-<meta name="description" content="Use TradingView Pine Script indicators in NinjaTrader 8 with no NinjaScript conversion. Runs Pine v5/v6 files (and upgrades v1–v4) live on your charts.">
-<meta name="keywords" content="Pine Script NinjaTrader, TradingView indicators NinjaTrader 8, convert Pine Script to NinjaScript, NinjaTrader 8 indicators, Pine Script v6, NinjaTrader add-on">
+<title>NinjaView: a TradingView-style chart for NinjaTrader 8, with Pine indicators, chart trading and Bar Replay</title>
+<meta name="description" content="A modern chart window for NinjaTrader 8. Trade from the chart with partial take profits, replay the market, copy trades across accounts, and run TradingView Pine Script and NinjaTrader indicators side by side, on your NinjaTrader data.">
+<meta name="keywords" content="NinjaTrader 8 chart, TradingView style chart NinjaTrader, NinjaTrader chart trading, NinjaTrader bar replay, NinjaTrader trade copier, Pine Script NinjaTrader, TradingView indicators NinjaTrader 8, NinjaTrader add-on">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0b0b0a">
 <link rel="canonical" href="https://nejjie73.github.io/NinjaView/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NinjaView">
 <meta property="og:url" content="https://nejjie73.github.io/NinjaView/">
-<meta property="og:title" content="Run TradingView Pine Script indicators in NinjaTrader 8">
-<meta property="og:description" content="Pine and NinjaTrader indicators, Bar Replay, paper trading and chart trading in one window, live on NinjaTrader 8 data.">
-<meta property="og:image" content="https://nejjie73.github.io/NinjaView/og-image-v2.png">
+<meta property="og:title" content="NinjaView: a modern chart for NinjaTrader 8">
+<meta property="og:description" content="Chart trading, Bar Replay, a trade copier, and Pine Script and NinjaTrader indicators in one window, live on NinjaTrader 8 data.">
+<meta property="og:image" content="https://nejjie73.github.io/NinjaView/og-image-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="NinjaView: Pine Script indicators inside NinjaTrader 8, with NinjaTrader indicators, Bar Replay, paper trading and chart trading">
+<meta property="og:image:alt" content="NinjaView in Black &amp; Gold: a TradingView-style chart window for NinjaTrader 8 with chart trading, Bar Replay, a trade copier and Pine Script indicators">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Run TradingView Pine Script indicators in NinjaTrader 8">
-<meta name="twitter:description" content="Pine and NinjaTrader indicators, Bar Replay, paper trading and chart trading in one window, live on NinjaTrader 8 data.">
-<meta name="twitter:image" content="https://nejjie73.github.io/NinjaView/og-image-v2.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "NinjaView", "url": "https://nejjie73.github.io/NinjaView/", "downloadUrl": "https://github.com/nejjie73/NinjaView/releases/latest", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows", "softwareRequirements": "NinjaTrader 8.1.9 or later", "description": "Run TradingView Pine Script (v5/v6) indicators inside NinjaTrader 8, calculated live from NinjaTrader data.", "image": "https://nejjie73.github.io/NinjaView/og-image-v2.png"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I use TradingView indicators in NinjaTrader 8?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NinjaView loads a TradingView Pine Script indicator file (.pine) and runs it on NinjaTrader 8 charts, calculating from NinjaTrader's own market data. Add the NinjaView Pine indicator to a chart and choose your script."}}, {"@type": "Question", "name": "Do I need to convert Pine Script to NinjaScript?", "acceptedAnswer": {"@type": "Answer", "text": "No. NinjaView interprets Pine Script v5 and v6 directly, and upgrades older v1–v4 scripts automatically, so there is no manual conversion to NinjaScript C#. Script inputs appear in NinjaTrader's indicator settings."}}, {"@type": "Question", "name": "Which Pine Script features are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Pine v5 and v6 indicators (older v1–v4 scripts are upgraded automatically) with var and varip state, user-defined types, methods, enums, arrays, maps, matrices, named arguments, most ta, math and str functions, every plot style, fills, linefills, hlines, shapes, boxes, lines, labels, polylines and tables, higher-timeframe requests, plus public library imports. It is a partial implementation, so some scripts may not compile yet."}}, {"@type": "Question", "name": "Can I replay the market and paper trade like on TradingView?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. In the NinjaView window, click Replay, pick any bar (or a random one) and play the market forward bar by bar or minute by minute, with your Pine indicator replaying alongside it. Paper trade with a TradingView-style order panel, quick buy and sell buttons and a right-click menu, with take profit and stop loss. Results include P&L, win rate, profit factor and drawdown, and you can save the trade log. Fills are simulated on one-minute bars and nothing is sent to your broker."}}, {"@type": "Question", "name": "Can I use my NinjaTrader indicators in the NinjaView window?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, experimentally. Add Indicator lists every installed NinjaTrader indicator, built-in and custom. NinjaView runs it on NinjaTrader's own engine against the window's bars and shows its plots, drawings and anything it paints on the chart, with its settings editable in NinjaView. Indicators that load their own extra data series are supported, and they run in Bar Replay too. NinjaTrader strategies are not supported yet."}}, {"@type": "Question", "name": "Does it work with strategies or place trades?", "acceptedAnswer": {"@type": "Answer", "text": "strategy() scripts load as indicators: their plots and drawings appear, but their orders are not backtested or placed. You can trade manually from the NinjaView window on a NinjaTrader account you choose, through NinjaTrader; trading starts switched off in every window. Trading in Bar Replay is simulated. Trading involves substantial risk of loss: try a simulation account first. The Copier tab can also copy your orders from one NinjaTrader account to others you select. It is new and lightly tested, and you should check your prop firm's rules on copying first."}}, {"@type": "Question", "name": "What is PackView?", "acceptedAnswer": {"@type": "Answer", "text": "A chart overlay in the Pack edition of NinjaView, for Pack members. It marks the Pack's read on price for NQ, ES, GC and RTY (and their micros): the Asia, London, NY1 and NY2 ranges, P12, the prior day's levels with their Candle Science odds, the MFE ladders, the 9am hour and the three-hour Line / Apex block, with Mick's workbook numbers credited to him. Its history numbers are built into each release and the day's levels come from your NinjaTrader data. It shows statistics; it places no orders."}}, {"@type": "Question", "name": "Will results match TradingView exactly?", "acceptedAnswer": {"@type": "Answer", "text": "Usually closely, but not guaranteed. NinjaView is an independent implementation and results also depend on matching data, session and history. Compare on the same contract, timeframe and date range before relying on a script."}}, {"@type": "Question", "name": "Which charts are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Time-based minute charts in NinjaTrader 8.1.9 and later on Windows x64. Tick, range, Renko and daily charts are not supported yet."}}]}</script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232466a7'/%3E%3Cpath d='M6 21l6-7 5 4 9-10' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="twitter:title" content="NinjaView: a modern chart for NinjaTrader 8">
+<meta name="twitter:description" content="Chart trading, Bar Replay, a trade copier, and Pine Script and NinjaTrader indicators in one window, live on NinjaTrader 8 data.">
+<meta name="twitter:image" content="https://nejjie73.github.io/NinjaView/og-image-v3.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "NinjaView", "url": "https://nejjie73.github.io/NinjaView/", "downloadUrl": "https://github.com/nejjie73/NinjaView/releases/latest", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows", "softwareRequirements": "NinjaTrader 8.1.9 or later", "description": "A modern chart window for NinjaTrader 8. Trade from the chart with partial take profits, replay the market, copy trades across accounts, and run TradingView Pine Script and NinjaTrader indicators side by side, on your NinjaTrader data.", "image": "https://nejjie73.github.io/NinjaView/og-image-v3.png"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is NinjaView a replacement for NinjaTrader's charts?", "acceptedAnswer": {"@type": "Answer", "text": "It's a chart window that runs inside NinjaTrader 8 (New › NinjaView), so many people trade from it instead of a NinjaTrader chart. It uses NinjaTrader's market data, your NinjaTrader accounts and NinjaTrader's order routing, so NinjaTrader stays open and connected underneath, and its own charts keep working alongside."}}, {"@type": "Question", "name": "Can I trade from the NinjaView chart?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Market, limit and stop orders go through NinjaTrader to the account you choose, the same way as Chart Trader. Set a stop loss and one or several partial take profits, drag them on the chart, place a draft order before sending it, and see every position on the account with Flatten per instrument. Trading starts switched off in every window, live accounts are labelled LIVE, and NinjaView never sees your broker login. Trading involves substantial risk of loss: try a simulation account first."}}, {"@type": "Question", "name": "Can I replay the market and paper trade like on TradingView?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Click Replay, pick any bar (or a random one) and play the market forward bar by bar or minute by minute, with your indicators replaying alongside. Paper trade with a TradingView-style order panel, quick buy and sell buttons and a right-click menu, with take profit and stop loss. Results include P&L, win rate, profit factor and drawdown, and you can save the trade log. Fills are simulated on one-minute bars and nothing is sent to your broker."}}, {"@type": "Question", "name": "Can it copy trades between my accounts?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The Copier tab copies every order you place on one NinjaTrader account to the others you select, at the same size, on your PC with no outside service. Save sets of accounts as Groups and swap them from the account list. It stops with an alert if anything looks wrong. It is new and lightly tested, and you should check your prop firm's rules on copying first."}}, {"@type": "Question", "name": "Can I use TradingView indicators in NinjaTrader 8?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NinjaView loads a TradingView Pine Script indicator file (.pine) and runs it on NinjaTrader's own market data, in the NinjaView window or on a regular NinjaTrader chart with the NinjaView Pine indicator. There is no manual conversion to NinjaScript: Pine v5 and v6 run directly and older v1–v4 scripts are upgraded automatically."}}, {"@type": "Question", "name": "Which Pine Script features are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Pine v5 and v6 indicators with var and varip state, user-defined types, methods, enums, arrays, maps, matrices, named arguments, most ta, math and str functions, every plot style, fills, linefills, hlines, shapes, boxes, lines, labels, polylines and tables, higher-timeframe requests, plus public library imports. It is a partial implementation, so some scripts may not compile yet, and strategy() scripts show their plots without backtesting their orders."}}, {"@type": "Question", "name": "Can I use my NinjaTrader indicators in the NinjaView window?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, experimentally. Add Indicator lists every installed NinjaTrader indicator, built-in and custom. NinjaView runs it on NinjaTrader's own engine and shows its plots, drawings and anything it paints on the chart, with its settings editable in NinjaView, live and in Bar Replay. Run up to 16 indicators at once, Pine and NinjaTrader mixed. NinjaTrader strategies are not supported yet."}}, {"@type": "Question", "name": "What is the 15m triple?", "acceptedAnswer": {"@type": "Answer", "text": "An overlay for NQ and ES in the Overlays menu. It boxes each hour's three 15-minute candles and their first 3 minutes, with the odds that the early high or low holds as the candle's wick, updated live, and Line vs Apex from the second candle on. A cog switches any of its drawings on or off. It shows statistics; it places no orders."}}, {"@type": "Question", "name": "What is PackView?", "acceptedAnswer": {"@type": "Answer", "text": "A chart overlay in the Pack edition of NinjaView, for Pack members. It marks the Pack's read on price for NQ, ES, GC and RTY (and their micros): the Asia, London, NY1 and NY2 ranges, P12, the prior day's levels with their Candle Science odds, the MFE ladders, the 9am hour and the three-hour Line / Apex block, with Mick's workbook numbers credited to him. Its history numbers are built into each release and the day's levels come from your NinjaTrader data. It shows statistics; it places no orders."}}, {"@type": "Question", "name": "Will Pine results match TradingView exactly?", "acceptedAnswer": {"@type": "Answer", "text": "Usually closely, but not guaranteed. NinjaView is an independent implementation and results also depend on matching data, session and history. Compare on the same contract, timeframe and date range before relying on a script."}}, {"@type": "Question", "name": "Which charts are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Time-based minute charts (1 to 1440 minutes) in NinjaTrader 8.1.9 and later on Windows x64. Tick, range, Renko and daily charts are not supported yet."}}]}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0a'/%3E%3Cpath d='M6 21l6-7 5 4 9-10' fill='none' stroke='%23e3c26f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <script>try{if(localStorage.getItem("nv-theme")==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
 <style>
-  /* Soft slate dark by default (easy on the eyes, like a charting platform); no pure white or black. */
+  /* Black & Gold, like the app's own theme: near-black surfaces, gold for actions and the things that matter. */
   :root {
     color-scheme: dark;
-    --bg: #141c27; --surface: #1b2532; --text: #d9e0e8; --muted: #94a1b2; --line: #2a3747;
-    --accent: #5b98d8; --accent-ink: #0d1824; --hot: #d9606c; --cold: #6aa3e0; --code: #222e3d;
+    --bg: #0b0b0a; --surface: #141311; --raised: #1b1a17; --text: #ece8de; --muted: #a39d8f; --line: #2a2722;
+    --gold: #e3c26f; --gold-strong: #f0d184; --gold-deep: #b38c26; --gold-ink: #15110a; --code: #1f1d19;
+    --up: #26a69a; --down: #ef5350; --glow: rgba(227, 194, 111, .10);
   }
-  /* Optional light theme, warm off-white rather than bright white. */
+  /* Optional light theme: warm paper, deep gold. */
   :root[data-theme="light"] {
     color-scheme: light;
-    --bg: #ecebe6; --surface: #f4f3ef; --text: #232a33; --muted: #5b6573; --line: #d8d6cf;
-    --accent: #2b67a3; --accent-ink: #f4f3ef; --hot: #b8323f; --cold: #2b67a3; --code: #e3e1da;
+    --bg: #f4f1e9; --surface: #fbf9f3; --raised: #fffdf8; --text: #1e1b15; --muted: #5d5649; --line: #ddd5c4;
+    --gold: #8a6a16; --gold-strong: #74580f; --gold-deep: #8a6a16; --gold-ink: #fffaf0; --code: #ebe5d6; --glow: rgba(138, 106, 22, .08);
   }
-  .theme { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 4px 10px; margin-left: 18px; font: inherit; font-size: 14px; cursor: pointer; }
-  .theme:hover { color: var(--text); }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
-  a { color: var(--accent); }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
-  header.top { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; }
+  a { color: var(--gold); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; letter-spacing: .01em; }
   .brand svg { width: 28px; height: 28px; }
-  nav a { margin-left: 18px; color: var(--muted); text-decoration: none; font-size: 15px; }
+  nav { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 4px 18px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
   nav a:hover { color: var(--text); }
-  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; padding: 40px 0 56px; }
-  h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.02em; }
-  .lede { font-size: 19px; color: var(--muted); margin: 0 0 28px; max-width: 34em; }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .btn { display: inline-block; padding: 12px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); color: var(--text); background: var(--surface); }
-  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-  .btn:hover { filter: brightness(1.06); }
+  .theme { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 14px; cursor: pointer; }
+  .theme:hover { color: var(--text); }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .hero { padding: 44px 0 20px; text-align: center; }
+  .kicker { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; margin-bottom: 18px; background: var(--surface); }
+  h1 { font-size: clamp(34px, 6vw, 60px); line-height: 1.05; margin: 0 auto 18px; letter-spacing: -0.025em; max-width: 14em; text-wrap: balance; }
+  h1 .gold { color: var(--gold); }
+  .lede { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); margin: 0 auto 28px; max-width: 40em; text-wrap: pretty; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .btn { display: inline-block; padding: 12px 22px; border-radius: 9px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); color: var(--text); background: var(--surface); }
+  .btn.primary { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+  .btn:hover { filter: brightness(1.07); }
   .fine { color: var(--muted); font-size: 14px; margin-top: 14px; }
-  .chart { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
-  .chart svg { width: 100%; height: auto; display: block; }
-  /* The trailer spills into the right-hand margin on wide screens so the UI text stays readable. */
-  .hero-media { margin: 0 calc(-1 * clamp(0px, (100vw - 1040px) / 2 - 32px, 400px)) 0 0; }
-  .chart video { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; border-radius: 8px; background: #0f1620; }
-  .chart .cap { font-size: 12px; color: var(--muted); margin: 8px 2px 0; }
-  section { padding: 48px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: 26px; margin: 0 0 20px; letter-spacing: -0.01em; }
+  .shot { margin: 34px 0 0; position: relative; }
+  .shot::before { content: ""; position: absolute; inset: 8% 6% -4%; background: radial-gradient(closest-side, var(--glow), transparent); z-index: -1; }
+  .frame { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #0b0b0a; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  .frame img, .frame video { display: block; width: 100%; height: auto; }
+  .cap { font-size: 13px; color: var(--muted); margin: 10px 2px 0; text-align: center; }
+
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 44px 0 8px; }
+  .pillars div { background: var(--surface); padding: 18px 20px; }
+  .pillars b { display: block; color: var(--gold); font-size: 15px; margin-bottom: 4px; }
+  .pillars span { color: var(--muted); font-size: 14px; }
+
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(24px, 3.4vw, 32px); margin: 0 0 12px; letter-spacing: -0.015em; text-wrap: balance; }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 46em; }
+  .row { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: center; margin-bottom: 56px; }
+  .row:last-child { margin-bottom: 0; }
+  .row.flip .media { order: 2; }
+  .row h3 { font-size: 22px; margin: 0 0 10px; }
+  .row p { color: var(--muted); margin: 0 0 12px; }
+  .tag { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  ul.ticks { list-style: none; margin: 0; padding: 0; }
+  ul.ticks li { position: relative; padding-left: 24px; margin: 0 0 9px; color: var(--muted); }
+  ul.ticks li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 9px; height: 9px; border-radius: 2px; background: var(--gold); transform: rotate(45deg); }
+  ul.ticks b { color: var(--text); font-weight: 600; }
+  .duo { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; align-items: start; }
+  .pack { margin-top: 14px; border: 1px solid var(--gold-deep); border-radius: 10px; padding: 14px 16px; background: var(--surface); }
+  .pack b { color: var(--gold); }
+  .pack p { margin: 6px 0 0; font-size: 15px; }
+
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .card.wide { grid-column: 1 / -1; }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
   .card h3 { margin: 0 0 8px; font-size: 17px; }
+  .card h3::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--gold); transform: rotate(45deg); margin: 0 10px 2px 1px; }
   .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  code { background: var(--code); padding: 2px 6px; border-radius: 5px; font: 14px/1.4 Consolas, "Cascadia Mono", monospace; }
+
   ol.steps { padding-left: 22px; margin: 0; }
   ol.steps li { margin: 0 0 12px; }
-  code { background: var(--code); padding: 2px 6px; border-radius: 5px; font: 14px/1.4 Consolas, "Cascadia Mono", monospace; }
+  ol.steps li::marker { color: var(--gold); font-weight: 700; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
   ul.plain { margin: 0; padding-left: 20px; color: var(--muted); }
   ul.plain li { margin-bottom: 8px; }
+  ul.plain li::marker { color: var(--gold-deep); }
   .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
+  .faq details[open] { border-color: var(--gold-deep); }
   .faq summary { cursor: pointer; font-weight: 600; }
+  .faq summary::marker { color: var(--gold); }
   .faq p { margin: 10px 0 2px; color: var(--muted); }
   footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
-  @media (max-width: 820px) {
-    .hero, .two { grid-template-columns: 1fr; gap: 28px; }
+  @media (max-width: 860px) {
+    .row, .two, .duo { grid-template-columns: 1fr; gap: 22px; }
+    .row.flip .media { order: 0; }
     .grid { grid-template-columns: 1fr; }
-    nav a { margin-left: 12px; }
+    .pillars { grid-template-columns: 1fr 1fr; }
     nav a.hide-sm { display: none; }
   }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <a class="brand" href="./">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#2466a7"/><path d="M6 21l6-7 5 4 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0b0b0a" stroke="#2a2722"/><path d="M6 21l6-7 5 4 9-10" fill="none" stroke="#e3c26f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       NinjaView
     </a>
     <nav>
+      <a class="hide-sm" href="#features">Features</a>
+      <a class="hide-sm" href="#pine">Pine Script</a>
       <a href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">Install</a>
-      <a class="hide-sm" href="https://github.com/nejjie73/NinjaView/blob/main/docs/supported-features.md">Supported</a>
+      <a class="hide-sm" href="#faq">FAQ</a>
       <a href="https://github.com/nejjie73/NinjaView">GitHub</a>
       <button class="theme" type="button" id="theme" aria-label="Switch color theme">Light</button>
     </nav>
   </header>
 
   <div class="hero">
-    <div>
-      <h1>Run TradingView Pine Script indicators in NinjaTrader&nbsp;8.</h1>
-      <p class="lede">Load a TradingView <code>.pine</code> indicator and see it on your NinjaTrader charts, calculated from NinjaTrader's own data and updating tick by tick. No conversion to NinjaScript.</p>
-      <div class="cta">
-        <a class="btn primary" href="https://github.com/nejjie73/NinjaView/releases/latest">Download now</a>
-        <a class="btn" href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">Install guide</a>
-      </div>
-      <p class="fine">Windows x64 · NinjaTrader 8.1.9+ · Not affiliated with TradingView or NinjaTrader</p>
+    <span class="kicker">For NinjaTrader 8</span>
+    <h1>A modern chart for <span class="gold">NinjaTrader&nbsp;8</span>.</h1>
+    <p class="lede">NinjaView is a TradingView-style chart window that runs inside NinjaTrader, on your NinjaTrader data and accounts. Trade from the chart, replay the market, copy trades across your accounts, and run Pine Script and NinjaTrader indicators side by side.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/nejjie73/NinjaView/releases/latest">Download now</a>
+      <a class="btn" href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">Install guide</a>
     </div>
-    <figure class="chart hero-media">
-      <video class="trailer" src="media/ninjaview-trailer.mp4" poster="media/ninjaview-trailer-poster.jpg" width="1920" height="1080" autoplay muted loop playsinline controls preload="metadata" aria-label="NinjaView trailer: Pine scripts, NinjaTrader indicators, Bar Replay and chart trading in the NinjaView window"></video>
-      <figcaption class="cap">53-second tour: Pine scripts, NinjaTrader indicators, Bar Replay and chart trading. Real NQ futures data; the trades shown are simulated.</figcaption>
+    <p class="fine">Windows x64 · NinjaTrader 8.1.9+ · Not affiliated with TradingView or NinjaTrader</p>
+    <figure class="shot">
+      <div class="frame"><img src="media/screen-chart.jpg" width="1800" height="1012" alt="The NinjaView window in Black &amp; Gold: a 5-minute NQ chart with a SuperTrend Pine indicator, the 15m triple overlay boxing the 11:00 hour's three 15-minute candles, and its info card"></div>
+      <figcaption class="cap">NQ 09-26, 5-minute, Black &amp; Gold. A Pine indicator and the 15m triple overlay on NinjaTrader data.</figcaption>
     </figure>
   </div>
 
+  <div class="pillars" role="list">
+    <div role="listitem"><b>Chart</b><span>TradingView-style, any 1–1440 minute interval, two themes</span></div>
+    <div role="listitem"><b>Trade</b><span>Orders, partial take profits and drafts on the chart</span></div>
+    <div role="listitem"><b>Replay</b><span>Play the market forward and paper trade it</span></div>
+    <div role="listitem"><b>Indicators</b><span>Pine Script and NinjaTrader, up to 16 at once</span></div>
+  </div>
+
   <section id="features">
-    <h2>TradingView indicators on NinjaTrader charts</h2>
+    <h2>Everything you trade from, in one window</h2>
+    <p class="sub">Open <b>New › NinjaView</b> in NinjaTrader. The window uses NinjaTrader's market data, accounts and order routing, so it fits alongside the platform you already use.</p>
+
+    <div class="row">
+      <div class="media frame"><img src="media/screen-trading.jpg" width="1800" height="1012" loading="lazy" alt="Trading from the NinjaView chart: a long position with its take profit and stop loss lines, the order panel on the right and Positions &amp; orders below"></div>
+      <div>
+        <div class="tag">Chart trading</div>
+        <h3>Trade from the chart</h3>
+        <ul class="ticks">
+          <li><b>Market, limit and stop orders</b> on the NinjaTrader account you choose, through NinjaTrader like Chart Trader.</li>
+          <li><b>Stop loss and partial take profits</b>: split the exit into several targets, each with its share of the stop, and drag them on the chart.</li>
+          <li><b>Draft orders</b> show on the chart before you send them. Right-click anywhere for orders at that price.</li>
+          <li><b>Every position on the account</b>, grouped by instrument, with Flatten per instrument or for all.</li>
+          <li>Trading starts switched off, live accounts are labelled <b>LIVE</b>, and NinjaView never sees your broker login.</li>
+        </ul>
+        <p class="fine">Trading involves substantial risk of loss. Try a simulation account first.</p>
+      </div>
+    </div>
+
+    <div class="row flip">
+      <div class="media frame"><video class="trailer" src="media/ninjaview-trailer.mp4" poster="media/ninjaview-trailer-poster.jpg" width="1920" height="1080" muted loop playsinline controls preload="none" aria-label="NinjaView tour: Pine scripts, NinjaTrader indicators, Bar Replay and chart trading"></video></div>
+      <div>
+        <div class="tag">Bar Replay</div>
+        <h3>Replay the market. Paper trade it.</h3>
+        <ul class="ticks">
+          <li><b>Pick any bar</b> (or a random one) and play forward bar by bar or minute by minute, with your indicators replaying alongside.</li>
+          <li><b>A TradingView-style order panel</b>, quick buy and sell buttons and a right-click menu, with take profit, stop loss and drafts.</li>
+          <li><b>Review the session</b>: P&amp;L, win rate, profit factor and drawdown, and save the trade log.</li>
+        </ul>
+        <p class="fine">Fills are simulated on one-minute bars; nothing is sent to your broker. The tour was recorded in the Slate theme on real NQ data; its trades are simulated.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="media duo">
+        <div class="frame"><img src="media/screen-triple.jpg" width="742" height="869" loading="lazy" alt="The 15m triple's card: the 11:00 hour's wick odds, where the minute-3 close sits, which early extreme held, and Line vs Apex"></div>
+        <div class="frame"><img src="media/screen-overlay-settings.jpg" width="606" height="594" loading="lazy" alt="The 15m triple's drawing settings: switches for the set box, first-3-minute boxes, early high and low lines, Line target and info card"></div>
+      </div>
+      <div>
+        <div class="tag">Overlays</div>
+        <h3>Read the hour as it forms</h3>
+        <p>The <b>Overlays</b> menu switches chart overlays on and off, and a cog on each one switches any of its drawings.</p>
+        <ul class="ticks">
+          <li><b>15m triple</b> (NQ and ES) boxes each hour's three 15-minute candles and their first 3 minutes, with the odds that the early high or low holds as the wick, updated live.</li>
+          <li>Where the minute-3 close sits in its early range, and Line vs Apex from the second candle on.</li>
+        </ul>
+        <div class="pack"><b>PackView, for Pack members.</b><p>The Pack edition adds PackView: the Pack's read on price for NQ, ES, GC and RTY, live and in Bar Replay, with the Asia, London, NY1 and NY2 ranges, P12, the prior day's levels with their Candle Science odds, the 9am hour, the four-step checklists and the three-hour Line / Apex block with Mick's workbook numbers.</p></div>
+      </div>
+    </div>
+
     <div class="grid">
-      <div class="card"><h3>Native chart indicator</h3><p>Add <b>NinjaView Pine</b> to any NinjaTrader minute chart and choose a <code>.pine</code> file. Inputs show up in the indicator settings and save with your workspace. Prefer a standalone chart? <b>New › NinjaView</b> opens a window that draws the same plots, labels and tables.</p></div>
-      <div class="card"><h3>Live, with correct rollback</h3><p>Developing bars update on every tick. <code>var</code> state rolls back between ticks and <code>varip</code> keeps intrabar changes, matching TradingView's realtime rules.</p></div>
-      <div class="card"><h3>Separate panels and overlays</h3><p>Oscillators get their own panel, with hlines, gradient fills and markers. Objects created with <code>force_overlay</code> draw on the price chart.</p></div>
+      <div class="card"><h3>Copy trades between accounts</h3><p>The <b>Copier</b> tab copies every order on one account to the others you select, at the same size, on your PC. Save accounts as <b>Groups</b> and swap them from the account list. It stops with an alert if anything looks wrong. New and lightly tested: check your prop firm's rules on copying first.</p></div>
+      <div class="card"><h3>Indicators, side by side</h3><p>Up to 16 at once in a TradingView-style legend: your TradingView Pine scripts and your installed NinjaTrader indicators (experimental), with hide, show and settings. They stay on the chart when you reopen the window.</p></div>
+      <div class="card"><h3>Black &amp; Gold, or Slate</h3><p>Two interface themes, plus TradingView-style chart settings: candle, wick and border colours, gradient background, grid, crosshair, price line and a countdown to the bar close.</p></div>
+    </div>
+  </section>
+
+  <section id="pine">
+    <h2>TradingView Pine Script, without conversion</h2>
+    <p class="sub">Load a TradingView <code>.pine</code> indicator and see it calculated from NinjaTrader's own data, updating tick by tick. No conversion to NinjaScript.</p>
+    <div class="grid">
+      <div class="card"><h3>In the window or on any chart</h3><p>Add Pine scripts in the NinjaView window, or add the <b>NinjaView Pine</b> indicator to a regular NinjaTrader minute chart. Inputs show up in the settings and save with your workspace.</p></div>
       <div class="card"><h3>Pine v5 &amp; v6, plus older scripts</h3><p>Types, methods, enums, arrays, maps, matrices and named arguments, most of <code>ta.*</code>, <code>math.*</code> and <code>str.*</code>, every plot style, boxes, lines, linefills, labels, polylines and tables. Pine v1–v4 scripts are upgraded automatically.</p></div>
+      <div class="card"><h3>Live, with correct rollback</h3><p>Developing bars update on every tick. <code>var</code> state rolls back between ticks and <code>varip</code> keeps intrabar changes, matching TradingView's realtime rules. Oscillators get their own panel.</p></div>
       <div class="card"><h3>Public libraries</h3><p>Scripts that <code>import</code> open-source libraries fetch the exact version from TradingView once, verified and cached. Local copies always win.</p></div>
-      <div class="card"><h3>Trade from the chart</h3><p>Market, limit and stop orders on a NinjaTrader account you choose, through NinjaTrader like Chart Trader. Drag your stop loss and take profits, split the exit into partial take profits, or set up a draft order on the chart before sending it. See every position on the account, grouped by instrument, and flatten one or all. Trading starts switched off, live accounts are labelled LIVE, and NinjaView never sees your broker login. Trading involves substantial risk of loss.</p></div>
-      <div class="card wide"><h3>Copy trades between your accounts</h3><p>New and lightly tested. The <b>Copier</b> tab copies every order you place on one NinjaTrader account to the others you select, at the same size, on your PC with no outside service. Save sets of accounts as <b>Groups</b> and swap them from the account list. It stops with an alert if anything looks wrong, and Emergency flatten closes every account in two clicks. Check your prop firm's rules on copying first.</p></div>
-      <div class="card wide"><h3>The 15m triple, and PackView for the Pack</h3><p>New in the NinjaView window's <b>Overlays</b> menu. The <b>15m triple</b> boxes each hour's three 15-minute candles on NQ and ES and their first 3 minutes, with the odds that the early high or low holds as the wick. A cog on each overlay switches any drawing on or off. Pack members get the <b>Pack edition</b> with <b>PackView</b>: the Pack's read on price for NQ, ES, GC and RTY, live and in Bar Replay, with the Asia, London, NY1 and NY2 ranges, P12, the prior day's levels with their Candle Science odds, the 9am hour, the four-step checklists and the three-hour Line / Apex block with Mick's workbook numbers. Plus a new <b>Black &amp; Gold</b> theme.</p></div>
-      <div class="card wide"><h3>Your NinjaTrader indicators, too</h3><p><b>Add Indicator</b> in the NinjaView window lists every NinjaTrader indicator you have installed, next to your Pine scripts. They run on NinjaTrader's own engine, live, with their plots, drawings and on-chart tables, and their settings are editable right there. Run up to 16 indicators at once, Pine and NinjaTrader mixed, listed in a TradingView-style legend. Experimental.</p></div>
-      <div class="card wide"><h3>Bar Replay and paper trading</h3><p>Click <b>Replay</b> in the NinjaView window, pick a bar and play the market forward with your indicator. Trade it with a TradingView-style order panel, chart buttons and a right-click menu, then review P&amp;L, win rate, profit factor and drawdown, and save the trade log. Fills are simulated on one-minute bars.</p></div>
+      <div class="card"><h3>Higher timeframes</h3><p>Same-symbol <code>request.security</code> at minute, daily, weekly and monthly timeframes, built from one-minute data.</p></div>
+      <div class="card"><h3>Honest about gaps</h3><p>It's an independent, partial implementation: some scripts won't compile yet, and <code>strategy()</code> scripts show their plots without backtesting their orders. <a href="https://github.com/nejjie73/NinjaView/blob/main/docs/supported-features.md">What's supported</a>.</p></div>
     </div>
   </section>
 
@@ -144,17 +242,17 @@
           <li><a href="https://github.com/nejjie73/NinjaView/releases/latest">Download</a> the <code>-NinjaScript.zip</code>. Leave it zipped.</li>
           <li>In NinjaTrader: <b>Tools › Import › NinjaScript Add-On</b>, then pick the ZIP.</li>
           <li>Restart NinjaTrader.</li>
-          <li>Add <b>NinjaView Pine</b> to a chart and choose your <code>.pine</code> file. For oscillators, set <b>Panel</b> to <b>New panel</b>.</li>
+          <li>Open <b>New › NinjaView</b> for the chart window, or add <b>NinjaView Pine</b> to a NinjaTrader chart for a Pine script.</li>
         </ol>
         <p class="fine">Full details, checksums and rollback: <a href="https://github.com/nejjie73/NinjaView/blob/main/docs/install.md">install guide</a>.</p>
       </div>
       <div>
         <h2>Good to know</h2>
         <ul class="plain">
-          <li>NinjaView is an independent, partial implementation of Pine. Some scripts won't compile yet. <code>strategy()</code> scripts show their plots and drawings, but their orders aren't backtested yet.</li>
-          <li>A script that loads can still calculate differently from TradingView. Compare on the same contract, timeframe and history before relying on it.</li>
+          <li>NinjaView runs inside NinjaTrader 8: it needs NinjaTrader open and connected for data, accounts and orders.</li>
           <li>Time-based minute charts only for now (no tick, range, Renko or daily).</li>
-          <li>Script failing? <a href="https://github.com/nejjie73/NinjaView/issues/new/choose">Open an issue</a> with the error and a link to the public script.</li>
+          <li>Pine is a partial implementation. A script that loads can still calculate differently from TradingView, so compare on the same contract, timeframe and history before relying on it.</li>
+          <li>Something wrong? <a href="https://github.com/nejjie73/NinjaView/issues/new/choose">Open an issue</a> with the error and, for a script, a link to the public source.</li>
         </ul>
       </div>
     </div>
@@ -163,15 +261,17 @@
   <section id="faq">
     <h2>Frequently asked questions</h2>
     <div class="faq">
-        <details><summary>Can I use TradingView indicators in NinjaTrader 8?</summary><p>Yes. NinjaView loads a TradingView Pine Script indicator file (.pine) and runs it on NinjaTrader 8 charts, calculating from NinjaTrader's own market data. Add the NinjaView Pine indicator to a chart and choose your script.</p></details>
-        <details><summary>Do I need to convert Pine Script to NinjaScript?</summary><p>No. NinjaView interprets Pine Script v5 and v6 directly, and upgrades older v1–v4 scripts automatically, so there is no manual conversion to NinjaScript C#. Script inputs appear in NinjaTrader's indicator settings.</p></details>
-        <details><summary>Which Pine Script features are supported?</summary><p>Pine v5 and v6 indicators (older v1–v4 scripts are upgraded automatically) with <code>var</code> and <code>varip</code> state, user-defined types, methods, enums, arrays, maps, matrices, named arguments, most ta, math and str functions, every plot style, fills, linefills, hlines, shapes, boxes, lines, labels, polylines and tables, higher-timeframe requests, plus public library imports. It is a partial implementation, so some scripts may not compile yet.</p></details>
-        <details><summary>Can I replay the market and paper trade like on TradingView?</summary><p>Yes. In the NinjaView window, click Replay, pick any bar (or a random one) and play the market forward bar by bar or minute by minute, with your Pine indicator replaying alongside it. Paper trade with a TradingView-style order panel, quick buy and sell buttons and a right-click menu, with take profit and stop loss. Results include P&amp;L, win rate, profit factor and drawdown, and you can save the trade log. Fills are simulated on one-minute bars and nothing is sent to your broker.</p></details>
-        <details><summary>Can I use my NinjaTrader indicators in the NinjaView window?</summary><p>Yes, experimentally. Add Indicator lists every installed NinjaTrader indicator, built-in and custom. NinjaView runs it on NinjaTrader's own engine against the window's bars and shows its plots, drawings and anything it paints on the chart, with its settings editable in NinjaView. Indicators that load their own extra data series are supported, and they run in Bar Replay too. NinjaTrader strategies are not supported yet.</p></details>
-        <details><summary>Does it work with strategies or place trades?</summary><p><code>strategy()</code> scripts load as indicators: their plots and drawings appear, but their orders are not backtested or placed. You can trade manually from the NinjaView window on a NinjaTrader account you choose, through NinjaTrader; trading starts switched off in every window. Trading in Bar Replay is simulated. Trading involves substantial risk of loss: try a simulation account first. The Copier tab can also copy your orders from one NinjaTrader account to others you select. It is new and lightly tested, and you should check your prop firm's rules on copying first.</p></details>
-        <details><summary>What is PackView?</summary><p>A chart overlay in the Pack edition of NinjaView, for Pack members. It marks the Pack's read on price for NQ, ES, GC and RTY (and their micros): the Asia, London, NY1 and NY2 ranges, P12, the prior day's levels with their Candle Science odds, the MFE ladders, the 9am hour and the three-hour Line / Apex block, with Mick's workbook numbers credited to him. Its history numbers are built into each release and the day's levels come from your NinjaTrader data. It shows statistics; it places no orders.</p></details>
-        <details><summary>Will results match TradingView exactly?</summary><p>Usually closely, but not guaranteed. NinjaView is an independent implementation and results also depend on matching data, session and history. Compare on the same contract, timeframe and date range before relying on a script.</p></details>
-        <details><summary>Which charts are supported?</summary><p>Time-based minute charts in NinjaTrader 8.1.9 and later on Windows x64. Tick, range, Renko and daily charts are not supported yet.</p></details>
+      <details><summary>Is NinjaView a replacement for NinjaTrader&#x27;s charts?</summary><p>It's a chart window that runs inside NinjaTrader 8 (<b>New › NinjaView</b>), so many people trade from it instead of a NinjaTrader chart. It uses NinjaTrader's market data, your NinjaTrader accounts and NinjaTrader's order routing, so NinjaTrader stays open and connected underneath, and its own charts keep working alongside.</p></details>
+      <details><summary>Can I trade from the NinjaView chart?</summary><p>Yes. Market, limit and stop orders go through NinjaTrader to the account you choose, the same way as Chart Trader. Set a stop loss and one or several partial take profits, drag them on the chart, place a draft order before sending it, and see every position on the account with Flatten per instrument. Trading starts switched off in every window, live accounts are labelled LIVE, and NinjaView never sees your broker login. Trading involves substantial risk of loss: try a simulation account first.</p></details>
+      <details><summary>Can I replay the market and paper trade like on TradingView?</summary><p>Yes. Click Replay, pick any bar (or a random one) and play the market forward bar by bar or minute by minute, with your indicators replaying alongside. Paper trade with a TradingView-style order panel, quick buy and sell buttons and a right-click menu, with take profit and stop loss. Results include P&amp;L, win rate, profit factor and drawdown, and you can save the trade log. Fills are simulated on one-minute bars and nothing is sent to your broker.</p></details>
+      <details><summary>Can it copy trades between my accounts?</summary><p>Yes. The Copier tab copies every order you place on one NinjaTrader account to the others you select, at the same size, on your PC with no outside service. Save sets of accounts as Groups and swap them from the account list. It stops with an alert if anything looks wrong. It is new and lightly tested, and you should check your prop firm's rules on copying first.</p></details>
+      <details><summary>Can I use TradingView indicators in NinjaTrader 8?</summary><p>Yes. NinjaView loads a TradingView Pine Script indicator file (.pine) and runs it on NinjaTrader's own market data, in the NinjaView window or on a regular NinjaTrader chart with the NinjaView Pine indicator. There is no manual conversion to NinjaScript: Pine v5 and v6 run directly and older v1–v4 scripts are upgraded automatically.</p></details>
+      <details><summary>Which Pine Script features are supported?</summary><p>Pine v5 and v6 indicators with <code>var</code> and <code>varip</code> state, user-defined types, methods, enums, arrays, maps, matrices, named arguments, most ta, math and str functions, every plot style, fills, linefills, hlines, shapes, boxes, lines, labels, polylines and tables, higher-timeframe requests, plus public library imports. It is a partial implementation, so some scripts may not compile yet, and <code>strategy()</code> scripts show their plots without backtesting their orders.</p></details>
+      <details><summary>Can I use my NinjaTrader indicators in the NinjaView window?</summary><p>Yes, experimentally. Add Indicator lists every installed NinjaTrader indicator, built-in and custom. NinjaView runs it on NinjaTrader's own engine and shows its plots, drawings and anything it paints on the chart, with its settings editable in NinjaView, live and in Bar Replay. Run up to 16 indicators at once, Pine and NinjaTrader mixed. NinjaTrader strategies are not supported yet.</p></details>
+      <details><summary>What is the 15m triple?</summary><p>An overlay for NQ and ES in the Overlays menu. It boxes each hour's three 15-minute candles and their first 3 minutes, with the odds that the early high or low holds as the candle's wick, updated live, and Line vs Apex from the second candle on. A cog switches any of its drawings on or off. It shows statistics; it places no orders.</p></details>
+      <details><summary>What is PackView?</summary><p>A chart overlay in the Pack edition of NinjaView, for Pack members. It marks the Pack's read on price for NQ, ES, GC and RTY (and their micros): the Asia, London, NY1 and NY2 ranges, P12, the prior day's levels with their Candle Science odds, the MFE ladders, the 9am hour and the three-hour Line / Apex block, with Mick's workbook numbers credited to him. Its history numbers are built into each release and the day's levels come from your NinjaTrader data. It shows statistics; it places no orders.</p></details>
+      <details><summary>Will Pine results match TradingView exactly?</summary><p>Usually closely, but not guaranteed. NinjaView is an independent implementation and results also depend on matching data, session and history. Compare on the same contract, timeframe and date range before relying on a script.</p></details>
+      <details><summary>Which charts are supported?</summary><p>Time-based minute charts (1 to 1440 minutes) in NinjaTrader 8.1.9 and later on Windows x64. Tick, range, Renko and daily charts are not supported yet.</p></details>
     </div>
   </section>
 
@@ -185,8 +285,6 @@
 function label(){b.textContent=r.dataset.theme==="light"?"Dark":"Light";}
 b.addEventListener("click",function(){if(r.dataset.theme==="light")delete r.dataset.theme;else r.dataset.theme="light";
 try{localStorage.setItem("nv-theme",r.dataset.theme==="light"?"light":"dark");}catch(e){}label();});label();})();
-(function(){var v=document.querySelector("video.trailer");
-if(v&&window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches){v.removeAttribute("autoplay");v.pause();}})();
 </script>
 </body>
 </html>
